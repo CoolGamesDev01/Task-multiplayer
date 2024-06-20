@@ -10,14 +10,14 @@ using TMPro;
 
 public class RelayManager : MonoBehaviour
 {
+    [SerializeField] private GameObject cubePrefab; // Prefabrykat klocka Cube
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private TMP_Text joinCodeText;
-
 
     private UnityTransport _transport;
     private const int MaxPlayers = 5;
 
-    private async void Awake()
+    private async void Start()
     {
         _transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
 
@@ -26,8 +26,20 @@ public class RelayManager : MonoBehaviour
 
     private async Task Authenticate()
     {
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        try
+        {
+            await UnityServices.InitializeAsync();
+
+            AuthenticationService.Instance.SignedIn += () =>
+            {
+                Debug.Log("Zalogowano pomyœlnie. Twoje ID: " + AuthenticationService.Instance.PlayerId);
+            };
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"B³¹d uwierzytelniania: {e.Message}");
+        }
     }
 
     public async void CreateRelay()
@@ -36,7 +48,7 @@ public class RelayManager : MonoBehaviour
         {
             Allocation a = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(a.AllocationId);
-            joinCodeText.text = $"Join Code: {joinCode}";
+            joinCodeText.text = $"Kod do³¹czenia: {joinCode}";
 
             _transport.SetHostRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes, a.Key, a.ConnectionData);
 
@@ -44,7 +56,7 @@ public class RelayManager : MonoBehaviour
         }
         catch (RelayServiceException e)
         {
-            Debug.LogError(e);
+            Debug.LogError($"Nie uda³o siê utworzyæ sesji Relay: {e.Message}");
         }
     }
 
@@ -61,7 +73,8 @@ public class RelayManager : MonoBehaviour
         }
         catch (RelayServiceException e)
         {
-            Debug.LogError(e);
+            Debug.LogError($"Nie uda³o siê do³¹czyæ do sesji Relay: {e.Message}");
         }
     }
 }
+
