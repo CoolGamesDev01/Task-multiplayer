@@ -1357,10 +1357,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6397bd654ebdfa845af1b875499807f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createLobbyNameField: {fileID: 0}
-  createLobbyMaxPlayersField: {fileID: 0}
-  lobbyItemPrefab: {fileID: 0}
-  lobbyContentParrent: {fileID: 0}
+  createLobbyNameField: {fileID: 1040243823}
+  createLobbyMaxPlayersField: {fileID: 864147034}
+  lobbyItemPrefab: {fileID: 5756750398279445137, guid: 589aadf477c667f4a816c86a3790d174, type: 3}
+  lobbyContentParrent: {fileID: 1370759079}
   joinedLobbyId: 
 --- !u!4 &629307480
 Transform:
@@ -1791,7 +1791,7 @@ GameObject:
   - component: {fileID: 857747833}
   - component: {fileID: 857747832}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CreateLobbyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1860,7 +1860,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 857747833}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 629307479}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: CreateLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &857747833
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,6 +37,8 @@ public class LobbyManager : MonoBehaviour
             foreach (Lobby lobby in queryResponse.Results)
             {
                 Transform newLobbyItem = Instantiate(lobbyItemPrefab, lobbyContentParrent);
+                newLobbyItem.GetChild(0).GetComponent<TextMeshProUGUI>().text = lobby.Name;
+                newLobbyItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = lobby.Players.Count + "/" + lobby.MaxPlayers;
             }
 
             await Task.Delay(1000);
