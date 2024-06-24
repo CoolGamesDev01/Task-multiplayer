@@ -38,7 +38,7 @@ public class Server : MonoBehaviour
 
         NetworkManager.Singleton.OnClientConnectedCallback += (clientId) => { Debug.Log("Client connected"); };
         NetworkManager.Singleton.OnServerStopped += (reason) => { Debug.Log("Server stopped"); };
-        NetworkManager.Singleton.SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         Debug.Log($"Started Server {transport.ConnectionData.Address}:{transport.ConnectionData.Port}");
 
         var callbacks = new MultiplayEventCallbacks();

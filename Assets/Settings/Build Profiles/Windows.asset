@@ -26,6 +26,8 @@ MonoBehaviour:
     m_path: Assets/Scenes/client_scene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/server_scene.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/Level1.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []

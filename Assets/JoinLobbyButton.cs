@@ -3,8 +3,9 @@ using UnityEngine;
 public class JoinLobbyButton : MonoBehaviour
 {
     public string lobbyId;
-    public void JoinLobbyButtonPressed()
+
+    public void OnJoinLobbyButtonClicked()
     {
-        LobbyManager.Instance.JoinLobby(lobbyId);
+        GameManager.Instance.JoinLobby(lobbyId);
     }
 }

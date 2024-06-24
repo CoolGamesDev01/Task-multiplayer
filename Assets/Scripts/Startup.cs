@@ -16,7 +16,6 @@ public class Startup : MonoBehaviour
         }
         else
         {
-            Debug.Log("Starting client");
             SceneManager.LoadScene(Client);
         }
     }

@@ -7,25 +7,37 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
-    static bool initialized;
 
     async void Start()
     {
-        if (!initialized)
+        await Authenticate();
+    }
+    private async Task Authenticate()
+    {
+        try
         {
             await UnityServices.InitializeAsync();
-            AuthenticationService.Instance.SwitchProfile(UnityEngine.Random.Range(0, 1000000).ToString());
+            //AuthenticationService.Instance.SwitchProfile(UnityEngine.Random.Range(0, 1000000).ToString());
+            AuthenticationService.Instance.SignedIn += () =>
+            {
+                Debug.Log("Zalogowano pomyœlnie. Twoje ID: " + AuthenticationService.Instance.PlayerId);
+            };
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            initialized = true;
         }
-
+        catch (System.Exception e)
+        {
+            Debug.LogError($"B³¹d uwierzytelniania: {e.Message}");
+        }
+    }
+    public async void FindGame()
+    {
         await StartSearch();
     }
-
     async Task StartSearch()
     {
         var players = new List<Player>
@@ -104,4 +116,10 @@ public class Client : MonoBehaviour
                 break;
         }
     }
+
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
 }

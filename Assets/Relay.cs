@@ -7,10 +7,10 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class RelayManager : MonoBehaviour
 {
-    [SerializeField] private GameObject cubePrefab; // Prefabrykat klocka Cube
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private TMP_Text joinCodeText;
 
@@ -21,25 +21,7 @@ public class RelayManager : MonoBehaviour
     {
         _transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
 
-        await Authenticate();
-    }
-
-    private async Task Authenticate()
-    {
-        try
-        {
-            await UnityServices.InitializeAsync();
-
-            AuthenticationService.Instance.SignedIn += () =>
-            {
-                Debug.Log("Zalogowano pomyœlnie. Twoje ID: " + AuthenticationService.Instance.PlayerId);
-            };
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"B³¹d uwierzytelniania: {e.Message}");
-        }
+        await UnityServices.InitializeAsync();
     }
 
     public async void CreateRelay()
@@ -52,6 +34,7 @@ public class RelayManager : MonoBehaviour
 
             _transport.SetHostRelayData(a.RelayServer.IpV4, (ushort)a.RelayServer.Port, a.AllocationIdBytes, a.Key, a.ConnectionData);
 
+            Debug.Log("Starting Host...");
             NetworkManager.Singleton.StartHost();
         }
         catch (RelayServiceException e)
@@ -76,5 +59,5 @@ public class RelayManager : MonoBehaviour
             Debug.LogError($"Nie uda³o siê do³¹czyæ do sesji Relay: {e.Message}");
         }
     }
-}
 
+}
