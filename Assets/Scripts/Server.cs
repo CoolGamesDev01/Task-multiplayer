@@ -89,7 +89,7 @@ public class Server : MonoBehaviour
 
         var backfillTicketProperties = new BackfillTicketProperties(results.MatchProperties);
 
-        string queueName = "test"; // must match the name of the queue you want to use in matchmaker
+        string queueName = "test"; 
         string connectionString = MultiplayService.Instance.ServerConfig.IpAddress + ":" +
                                   MultiplayService.Instance.ServerConfig.Port;
 

@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Linux
+  m_Name: Windows
   m_EditorClassIdentifier: 
-  m_BuildTarget: 24
+  m_BuildTarget: 19
   m_Subtarget: 2
-  m_PlatformId: cb423bfea44b4d658edb8bc5d91a3024
+  m_PlatformId: 4e3c793746204150860bf175a9a41a05
   m_PlatformBuildProfile:
-    rid: 7032906790507905024
+    rid: 7032906731069112322
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/Scenes/Startup.unity
+  - m_enabled: 0
+    m_path: Assets/Scenes/SampleScene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/client_scene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/server_scene.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/Level1.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
     version: 2
     RefIds:
-    - rid: 7032906790507905024
-      type: {class: LinuxPlatformSettings, ns: UnityEditor.LinuxStandalone, asm: UnityEditor.LinuxStandalone.Extensions}
+    - rid: 7032906731069112322
+      type: {class: WindowsPlatformSettings, ns: UnityEditor.WindowsStandalone, asm: UnityEditor.WindowsStandalone.Extensions}
       data:
         m_Development: 0
         m_ConnectProfiler: 0
@@ -46,3 +46,9 @@ MonoBehaviour:
         m_ExplicitArrayBoundsChecks: 0
         m_CompressionType: 0
         m_InstallInBuildFolder: 0
+        m_WindowsBuildAndRunDeployTarget: 0
+        m_Architecture: 0
+        m_CreateSolution: 0
+        m_CopyPDBFiles: 0
+        m_WindowsDevicePortalAddress: 
+        m_WindowsDevicePortalUsername: 
