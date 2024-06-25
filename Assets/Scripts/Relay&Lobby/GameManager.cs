@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         _transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         await UnityServices.InitializeAsync();
-        await SignInAnonymouslyAsync();
+        //await SignInAnonymouslyAsync();
         ShowLobbies();
     }
 
@@ -121,7 +121,6 @@ public class GameManager : MonoBehaviour
 
         try
         {
-            // Tworzenie Relay
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             joinCodeText.text = $"Join code: {joinCode}";
@@ -131,7 +130,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Starting Host...");
             NetworkManager.Singleton.StartHost();
 
-            // Tworzenie Lobby i dodanie kodu relay
             await CreateLobbyWithRelay(createLobbyNameField.text, maxPlayers, joinCode);
             ShowHideMenuUI();
         }
@@ -143,13 +141,10 @@ public class GameManager : MonoBehaviour
 
     public void LeaveRelay()
     {
-        if (NetworkManager.Singleton.IsHost)
-        {
             NetworkManager.Singleton.Shutdown();
             Debug.Log("Relay stopped by Host!");
             joinCodeText.text = "";
             ShowHideMenuUI();
-        }
     }
     #endregion
 
@@ -173,7 +168,6 @@ public class GameManager : MonoBehaviour
                 newLobbyItem.GetChild(0).GetComponent<TextMeshProUGUI>().text = lobby.Name;
                 newLobbyItem.GetChild(1).GetComponent<TextMeshProUGUI>().text = lobby.Players.Count + "/" + lobby.MaxPlayers;
 
-                // Przekazanie kodu relay do przycisku do³¹czenia
                 if (lobby.Data.ContainsKey("relayJoinCode"))
                 {
                     joinLobbyButton.relayJoinCode = lobby.Data["relayJoinCode"].Value;

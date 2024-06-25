@@ -49,7 +49,7 @@ public class Client : MonoBehaviour
         string queueName = "test";
         var options = new CreateTicketOptions(queueName, attributes);
 
-        while (!await FindMatch(players, options)) // if we dont find a match, wait a second and try again
+        while (!await FindMatch(players, options))
             await Awaitable.WaitForSecondsAsync(1f);
     }
 
@@ -76,12 +76,11 @@ public class Client : MonoBehaviour
                             transport.SetConnectionData(assignment.Ip, (ushort) assignment.Port);
                             bool result = NetworkManager.Singleton.StartClient();
                             
-                            // Logging and showing on UI
                             Debug.Log("StartClient " + result);
                             FindFirstObjectByType<TMP_Text>().SetText("StartClient " + result);
                             NetworkManager.Singleton.OnConnectionEvent += LogConnectionEvent;
 
-                            return result; // if we fail to connect try again w/ a false result
+                            return result;
                         }
 
                         Debug.LogError("No port found");

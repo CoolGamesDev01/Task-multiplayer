@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Netcode;
 
 public class PlayerMovement : NetworkBehaviour
@@ -10,10 +10,8 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        // Sprawd�, czy obiekt jest lokalnym graczem (tylko lokalny gracz b�dzie m�g� sterowa� ruchem)
         if (IsLocalPlayer)
         {
-            // W��cz obs�ug� poruszania si� gracza
             enabled = true;
         }
     }
