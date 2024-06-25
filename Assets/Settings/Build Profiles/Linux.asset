@@ -23,9 +23,9 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/server_scene.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/GameScene.unity
-  - m_enabled: 1
     m_path: Assets/Scenes/client_scene.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/GameScene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Relay&Lobby_scene.unity
   m_ScriptingDefines: []

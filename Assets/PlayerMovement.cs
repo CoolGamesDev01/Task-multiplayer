@@ -10,10 +10,10 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        // SprawdŸ, czy obiekt jest lokalnym graczem (tylko lokalny gracz bêdzie móg³ sterowaæ ruchem)
+        // Sprawdï¿½, czy obiekt jest lokalnym graczem (tylko lokalny gracz bï¿½dzie mï¿½gï¿½ sterowaï¿½ ruchem)
         if (IsLocalPlayer)
         {
-            // W³¹cz obs³ugê poruszania siê gracza
+            // Wï¿½ï¿½cz obsï¿½ugï¿½ poruszania siï¿½ gracza
             enabled = true;
         }
     }
@@ -27,6 +27,6 @@ public class PlayerMovement : NetworkBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-        rb.velocity = direction * moveSpeed;
+        rb.linearVelocity = direction * moveSpeed;
     }
 }
