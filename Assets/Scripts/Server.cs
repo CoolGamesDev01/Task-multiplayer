@@ -52,7 +52,6 @@ public class Server : MonoBehaviour
             await Awaitable.NextFrameAsync();
         }
 
-        // We must then subscribe.
         var events = await MultiplayService.Instance.SubscribeToServerEventsAsync(callbacks);
         await CreateBackfillTicket();
     }

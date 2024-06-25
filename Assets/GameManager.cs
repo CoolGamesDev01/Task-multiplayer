@@ -80,9 +80,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Starting Host...");
             NetworkManager.Singleton.StartHost();
 
-            GameObject playerPrefab = NetworkManager.Singleton.NetworkConfig.PlayerPrefab;
-            ChangePlayerColor(playerPrefab, Color.blue);
-
             ShowHideMenuUI();
         }
         catch (RelayServiceException e)
@@ -105,9 +102,6 @@ public class GameManager : MonoBehaviour
             _transport.SetClientRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData, allocation.HostConnectionData);
 
             NetworkManager.Singleton.StartClient();
-
-            GameObject playerPrefab = NetworkManager.Singleton.NetworkConfig.PlayerPrefab;
-            ChangePlayerColor(playerPrefab, Color.red);
 
             ShowHideMenuUI();
         }
@@ -145,13 +139,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError($"Failed to create Relay session: {e.Message}");
         }
-    }
-
-    private void ChangePlayerColor(GameObject playerPrefab, Color color)
-    {
-        Renderer renderer = playerPrefab.GetComponent<Renderer>();
-
-        renderer.sharedMaterial.color = color;
     }
 
     public void LeaveRelay()
